@@ -1,5 +1,7 @@
 package MojoX::Renderer::IncludeLater;
 
+our $VERSION = '0.01';
+
 use Mojo::Base 'Mojolicious::Plugin';
 
 our $counter = 0;
