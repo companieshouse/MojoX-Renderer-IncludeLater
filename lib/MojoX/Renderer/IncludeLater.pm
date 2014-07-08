@@ -10,8 +10,10 @@ sub register {
     my ($self, $app) = @_;
 
     $app->helper(include_later => sub {
-      my ($self, $template, $args) = @_;
-      my $key = "\0IL\0" . ++$counter . "\0";
+      my ($self, $template) = (shift, shift);
+      my $args = scalar @_ % 2 == 0 ? { @_ } : shift;
+      my $key  = "\0IL\0" . ++$counter . "\0";
+
       $self->stash->{'mojo.x.include_later'}->{$key} = [ $template, $args ];
       return $key;
     });
@@ -20,7 +22,7 @@ sub register {
       my ($self, $output, $format) = @_;
       while(my ($id) = $$output =~ /(\0IL\0\d+\0)/m) {
         my ($template, $args) = @{$self->stash->{'mojo.x.include_later'}->{$id}};
-        my ($op, $format) = $app->renderer->render($self, { partial => 1, template => $template, %$args });
+        my ($op, $format) = $app->renderer->render($self, { partial => 1, template => $template, $args ? %$args : () });
         warn "Error rendering include_later" if !$op;
         $id = quotemeta $id;
         $$output =~ s/$id/$op/m;
