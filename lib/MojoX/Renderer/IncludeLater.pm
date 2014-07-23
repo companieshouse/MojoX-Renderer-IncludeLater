@@ -22,10 +22,10 @@ sub register {
       my ($self, $output, $format) = @_;
       while(my ($id) = $$output =~ /(\0IL\0\d+\0)/m) {
         my ($template, $args) = @{$self->stash->{'mojo.x.include_later'}->{$id}};
-        my ($op, $format) = $app->renderer->render($self, { partial => 1, template => $template, $args ? %$args : () });
-        warn "Error rendering include_later" if !$op;
+        my $string = $self->render_to_string(template => $template, $args ? %$args : ());
+        warn "Error rendering include_later" unless defined $string;
         $id = quotemeta $id;
-        $$output =~ s/$id/$op/m;
+        $$output =~ s/$id/$string/m;
       }
     });
 }
