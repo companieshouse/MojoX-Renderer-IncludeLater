@@ -1,6 +1,6 @@
 package MojoX::Renderer::IncludeLater;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 use Mojo::Base 'Mojolicious::Plugin';
 
