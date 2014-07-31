@@ -1,6 +1,7 @@
 Revision history for Perl module MojoX::Renderer::IncludeLater
 
 {{$NEXT}}
+  - harmonise to CHGOVUK standard
  - Fixed compatibility issues with Mojolicious 5
 
 0.02 2014-07-08
