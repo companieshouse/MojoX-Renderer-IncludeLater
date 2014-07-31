@@ -1,0 +1,11 @@
+Revision history for Perl module MojoX::Renderer::IncludeLater
+
+0.30  2014-07-31
+  - harmonise to CHGOVUK standard
+ - Fixed compatibility issues with Mojolicious 5
+
+0.02 2014-07-08
+ - Fixed issue related to dereferencing an undefined value
+
+0.01 2014-02-17
+ - first release to CPAN
